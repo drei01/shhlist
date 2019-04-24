@@ -1,0 +1,65 @@
+/* Empty. Add your own CSS if you like */
+div.code-wrapper {
+    text-align: center;
+}
+
+.code-wrapper .code {
+    font-weight: 600;
+    font-size: 22px;
+}
+
+form i.icon.error {
+    color: #ef4e3a;
+}
+
+form input + i.icon.error {
+    display: none;
+    margin-left: 8px;
+}
+
+form select + i.icon.error {
+    display: none;
+    margin-left: 8px;
+}
+
+form.ng-submitted input.ng-invalid + i.icon.error {
+    display: block;
+}
+
+form.ng-submitted select.ng-invalid + i.icon.error {
+    display: block;
+}
+
+form .has-error {
+    border-left: 3px solid #cc2511;
+    border-right: 3px solid #cc2511;
+}
+
+form .has-success {
+    border-left: 3px solid #3d8b3d;
+    border-right: 3px solid #3d8b3d;
+}
+
+form.ng-submitted input.ng-valid + i.icon.error {
+    display: none;
+}
+
+.item-note,
+span.item-title {
+    white-space: normal !important;
+    text-decoration: none !important;
+}
+
+span.item-title {
+    display: inline-block;
+    max-width: 90%;
+}
+
+.item-note-pad-right {
+    padding-right: 30px;
+}
+
+.toggled-by {
+    position: relative;
+    top: 10px;
+}

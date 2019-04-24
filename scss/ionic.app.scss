@@ -1,0 +1,90 @@
+/*
+To customize the look and feel of Ionic, you can override the variables
+in ionic's _variables.scss file.
+
+For example, you might change some of the default colors:
+
+$light:                           #fff !default;
+$stable:                          #f8f8f8 !default;
+$positive:                        #387ef5 !default;
+$calm:                            #11c1f3 !default;
+$balanced:                        #33cd5f !default;
+$energized:                       #ffc900 !default;
+$assertive:                       #ef473a !default;
+$royal:                           #886aea !default;
+$dark:                            #444 !default;
+*/
+
+// The path for our ionicons font files, relative to the built CSS in www/css
+$ionicons-font-path: "../lib/ionic/fonts" !default;
+
+// Include all of Ionic
+@import "www/lib/ionic/scss/ionic";
+
+.ionic-logo{
+  display: block;
+  margin: 15px auto;
+  width: 96px;
+  height: 96px;
+}
+
+.button-notifications{
+    padding-left: 10px;
+}
+
+.item-checkbox .checkbox{
+  right: 40px;
+  top: 70%;
+}
+
+.button.x-box{
+  position: absolute;
+  right: 6px;
+  float: right;
+  margin: -15px 0;
+}
+
+.red{
+  color: #ECD2D2;
+}
+
+.task.item-checkbox{
+  padding-right: 45px;
+  border-bottom-style: dotted;
+}
+
+.new-item , .list-icon{
+    padding: 0 10px;
+    font-size: 20px;
+    color: #efefef;
+}
+
+.list-icon {
+    font-size: 20px;
+    color: #000;
+}
+
+.task.item-checkbox span{
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+li.finished span {
+    font-style: italic;
+    text-decoration: line-through;
+}
+
+input.newProjectName{
+  font-size: 22px;
+}
+
+div.margins{
+  position: absolute;
+  top: 0;
+  left: 47px;
+  z-index: 2;
+  width: 4px;
+  height: 100%;
+  border: 1px solid #ECD2D2;
+}
+
