@@ -14,8 +14,6 @@ app.factory('AuthService', function($localstorage) {
                     return;
                 }
 
-                var user = $localstorage.getObject('user');
-
                 if (user && user.email && user.password) {
                     firebase
                         .auth()
@@ -38,7 +36,6 @@ app.factory('AuthService', function($localstorage) {
                 .auth()
                 .createUserAndRetrieveDataWithEmailAndPassword(opts.email, opts.password)
                 .then(() => {
-                    $localstorage.setObject('user', user); //successfully registered, store the email and password for later login
                     firebase
                         .child('users')
                         .child(userData.uid)
@@ -52,11 +49,7 @@ app.factory('AuthService', function($localstorage) {
         login: function(email, password) {
             return firebase
                 .auth()
-                .signInWithEmailAndPassword(email, password)
-                .then(user => {
-                    $localstorage.setObject('user', user); //store the email and password for later login
-                    return user;
-                });
+                .signInWithEmailAndPassword(email, password);
         },
 
         logout: function() {
