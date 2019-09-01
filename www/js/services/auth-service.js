@@ -8,26 +8,7 @@ app.factory('AuthService', function($localstorage) {
     return {
         checkAuth: function() {
             return new Promise(function(resolve, reject) {
-                var authData = firebase.auth().currentUser;
-                if (authData) {
-                    resolve(authData);
-                    return;
-                }
-
-                if (user && user.email && user.password) {
-                    firebase
-                        .auth()
-                        .signInWithEmailAndPassword({
-                            email: user.email,
-                            password: user.password,
-                        })
-                        .then(authData => {
-                            resolve(authData);
-                        })
-                        .catch(error => reject(error));
-                } else {
-                    resolve(null);
-                }
+                firebase.auth().onAuthStateChanged(resolve);
             });
         },
 

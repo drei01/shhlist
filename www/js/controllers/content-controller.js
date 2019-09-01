@@ -33,7 +33,7 @@ app.controller('ContentController', function(
 
     var init = function() {
         AuthService.checkAuth()
-            .then(function(user, error) {
+            .then(function(user) {
                 if (user) {
                     loadUser(user);
                     loadProjects(user).then(function() {
