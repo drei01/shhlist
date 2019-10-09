@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <title>Shhlist</title>
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' http://192.168.0.8:8100 http://192.168.0.8:35729 https://shhlist.firebaseio.com googleapis.com https://www.gstatic.com 'unsafe-inline' 'unsafe-eval'; object-src none;">
 
     <link href="css/ionic.app.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
@@ -13,9 +14,15 @@
 
     <!-- Ionic -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
+
+    <!-- Angular -->
+    <script src="lib/ionic/js/angular/angular.min.js"></script>
     
     <!-- Firebase -->
-    <script src="js/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.0.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.0.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.0.0/firebase-auth.js"></script>
+
     <!-- AngularFire -->
     <script src="js/angularfire.min.js"></script>
 

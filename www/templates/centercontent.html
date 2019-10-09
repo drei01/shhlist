@@ -1,7 +1,6 @@
 <ion-view title="{{ activeProjectObject.title ? activeProjectObject.title : 'Shhlist' }}">
   <ion-nav-buttons side="left">
     <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
-    <button class="button button-clear button-notifications" ng-show="invites.length > 0" menu-toggle="left"><span class="badge badge-assertive">{{ invites.length }}</span></button>
   </ion-nav-buttons>
   <ion-nav-buttons side="right">
   </ion-nav-buttons>
@@ -11,20 +10,24 @@
         ng-repeat="(key,task) in activeTasksArray"
         ng-class="{'finished': task.finished === true && activeProjectObject.uid!=uid , 'item-checkbox': task.uid!=uid}"
         ng-if="(task.created_by_uid === uid || activeProjectObject.uid!=uid)"><!-- created by me or not my project -->
-        <label class="checkbox checkbox-balanced" ng-model="task.finished" ng-show="task.uid!=uid">
+        <div class="task-detail">
+        <label class="checkbox checkbox-balanced" ng-model="task.finished" ng-if="task.uid!==uid">
             <div class="checkbox checkbox-input-hidden disable-pointer-events checkbox-circle">
                 <input ng-model="task.finished" type="checkbox" ng-change="toggleTask(task.$id)"><i class="checkbox-icon"></i>
             </div>
         </label>
-        <i class="icon ion-ios-circle-outline list-icon" ng-show="task.uid===uid"></i>
+        <i class="icon ion-ios-circle-outline list-icon" ng-if="task.uid===uid"></i>
         <span class="item-title">{{ task.title }}</span>
-            <button class="button button-icon icon ion-close-circled
-              x-box red"
-              ng-click="deleteTask(key)" ng-show="task.created_by_uid===uid"></button>
+        <button class="button button-icon icon ion-close-circled
+          x-box red"
+          ng-click="deleteTask(key)" ng-show="task.created_by_uid===uid"></button>
+        </div>
+        <div class="task-sub-detail">
           <span class="item-note" ng-class="task.uid===uid?'item-note-pad-right':''">
-              <div ng-if="task.created_by_uid != uid">added by {{ task.created_by }}</div>
-              <div ng-if="task.created_by_uid === uid && activeProjectObject.uid!=uid">you added</div>
-          </span>
+            <div ng-if="task.created_by_uid != uid">added by {{ task.created_by }}</div>
+            <div ng-if="task.created_by_uid === uid && activeProjectObject.uid!=uid">you added</div>
+        </span>
+        </div>
       </li>
       <li>
         <form ng-submit="createTask(task)">

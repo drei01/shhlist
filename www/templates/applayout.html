@@ -23,7 +23,7 @@
             ng-class="{active: activeProjectObject.$id === project.$id}">
           {{ project.title }}
           <button class="button button-icon icon ion-close-circled
-            x-box red"
+            x-box red menu-x"
             ng-click="deleteProject(project.code)"></button>
         </ion-item>
           
@@ -38,7 +38,7 @@
             ng-class="{active: activeProjectObject.$id === project.obj.$id}">
           {{ project.obj.title }}
           <button class="button button-icon icon ion-close-circled
-            x-box red"
+            x-box red menu-x"
             ng-click="deleteFriendProject(project.id)"></button>
         </ion-item>
       </ion-list>

@@ -44,6 +44,16 @@ form.ng-submitted input.ng-valid + i.icon.error {
     display: none;
 }
 
+.task-detail,
+.task-sub-detail {
+    display: flex;
+    flex-direction: row;
+}
+
+.item-note {
+    flex: 1;
+}
+
 .item-note,
 span.item-title {
     white-space: normal !important;
@@ -53,6 +63,18 @@ span.item-title {
 span.item-title {
     display: inline-block;
     max-width: 90%;
+    flex-grow: 3;
+}
+
+.button.x-box {
+    margin-left: auto;
+    align-self: flex-end;
+}
+
+.button.menu-x {
+    position: absolute;
+    right: 0;
+    bottom: 3px;
 }
 
 .item-note-pad-right {
