@@ -3,6 +3,8 @@
     <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
   </ion-nav-buttons>
   <ion-nav-buttons side="right">
+      <button ng-if="activeProjectObject.settings.thirdParty" ng-click="showThirdPartyWarning()" class="button button-icon icon ion-unlocked"></button>
+      <button ng-if="activeProjectObject && activeProjectObject.uid===uid" ng-click="projectSettings()" class="button button-icon icon ion-gear-a"></button>
   </ion-nav-buttons>
   <ion-content class="has-header">
     <ul class="list" ng-show="activeTasksArray">
@@ -11,12 +13,12 @@
         ng-class="{'finished': task.finished === true && activeProjectObject.uid!=uid , 'item-checkbox': task.uid!=uid}"
         ng-if="(task.created_by_uid === uid || activeProjectObject.uid!=uid)"><!-- created by me or not my project -->
         <div class="task-detail">
-        <label class="checkbox checkbox-balanced" ng-model="task.finished" ng-if="task.uid!==uid">
+        <label class="checkbox checkbox-balanced" ng-model="task.finished" ng-if="task.uid!==uid || activeProjectObject.settings.thirdParty">
             <div class="checkbox checkbox-input-hidden disable-pointer-events checkbox-circle">
                 <input ng-model="task.finished" type="checkbox" ng-change="toggleTask(task.$id)"><i class="checkbox-icon"></i>
             </div>
         </label>
-        <i class="icon ion-ios-circle-outline list-icon" ng-if="task.uid===uid"></i>
+        <i class="icon ion-ios-circle-outline list-icon" ng-if="task.uid===uid && !activeProjectObject.settings.thirdParty"></i>
         <span class="item-title">{{ task.title }}</span>
         <button class="button button-icon icon ion-close-circled
           x-box red"

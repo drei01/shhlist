@@ -36,9 +36,8 @@ app.controller('ContentController', function(
             .then(function(user) {
                 if (user) {
                     loadUser(user);
-                    loadProjects(user).then(function() {
-                        loadFriendsProjects().then($scope.loaded);
-                    });
+                    Promise.all([loadProjects(user), loadFriendsProjects()])
+                    .then($scope.loaded);
                 } else {
                     $scope.hideLoading();
                     $state.go('app.register');
@@ -244,6 +243,16 @@ app.controller('ContentController', function(
         }
     );
 
+    $ionicModal.fromTemplateUrl(
+        'templates/projectsettingsmodal.html',
+        function(modal) {
+            $scope.projectSettingsModal = modal;
+        },
+        {
+            scope: $scope,
+        }
+    );
+
     $scope.createTask = function(task) {
         if (!$scope.activeProject || !task || !task.title) {
             return;
@@ -314,6 +323,30 @@ app.controller('ContentController', function(
 
     $scope.closeNewProject = function() {
         $scope.projectModal.hide();
+    };
+
+    $scope.projectSettings = function() {
+        $scope.projectSettingsModal.show();
+    };
+
+    $scope.closeProjectSettings = function() {
+        $scope.projectSettingsModal.hide();
+    };
+
+    $scope.updateProjectSettings =  function(settings) {
+        $scope.activeProjectObject.$save().catch(function(err) {
+            $ionicPopup.alert({
+                title: 'Oops',
+                template: error,
+            });
+        });
+    }
+
+    $scope.showThirdPartyWarning = function() {
+        $ionicPopup.alert({
+            title: 'Ticked items are public',
+            template: `The settings for this list mean that ticked items are visible to the creator.`,
+        });
     };
 
     $scope.toggleProjects = function() {
