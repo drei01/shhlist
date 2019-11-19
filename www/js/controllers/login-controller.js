@@ -1,8 +1,11 @@
 app.controller('LoginController', function($scope, $ionicPopup, $state, AuthService) {
     $scope.data = {};
-    $scope.resetPasswordData = {};
 
     $scope.showResetPassword = false;
+
+    $scope.toggleResetPasswordForm = () => {
+        $scope.showResetPassword = !$scope.showResetPassword;
+    }
 
     $scope.login = function() {
         AuthService.login($scope.data.email, $scope.data.password)
@@ -26,7 +29,7 @@ app.controller('LoginController', function($scope, $ionicPopup, $state, AuthServ
     };
 
     $scope.resetPassword = function() {
-        AuthService.resetPassword($scope.resetPasswordData.email)
+        AuthService.passwordReset($scope.data.email)
             .then(function() {
                 $ionicPopup.alert({
                     title: 'Password Reset',
@@ -34,10 +37,10 @@ app.controller('LoginController', function($scope, $ionicPopup, $state, AuthServ
                         'If we found your account then you will recieve an email shortly with instructions to reset your password',
                 });
             })
-            .catch(function() {
+            .catch(function(err) {
                 $ionicPopup.alert({
                     title: 'Oops',
-                    template: 'Something went wrong resetting your password. Please try again.',
+                    template: `Something went wrong resetting your password. Please try again. ${err.message}`,
                 });
             });
     };
