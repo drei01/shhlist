@@ -89,3 +89,13 @@ span.item-title {
 .overflow-visible {
     overflow: visible;
 }
+
+.item-icon,
+.icon-picker {
+    margin-right: 5px;
+    font-size: 20px;
+}
+
+.icon-picker {
+    cursor: pointer;
+}
