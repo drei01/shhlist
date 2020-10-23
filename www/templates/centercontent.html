@@ -19,6 +19,7 @@
             </div>
         </label>
         <i class="icon ion-ios-circle-outline list-icon" ng-if="task.uid===uid && !activeProjectObject.settings.thirdParty"></i>
+        <span class="item-icon" ng-if="task.icon" ng-bind-html="task.icon | emojify"></span>
         <span class="item-title">{{ task.title }}</span>
         <button class="button button-icon icon ion-close-circled
           x-box red"
@@ -34,8 +35,9 @@
       <li>
         <form ng-submit="createTask(task)">
           <div class="list">
-            <label class="item item-input">
+            <label class="item item-input overflow-visible">
               <i class="icon ion-plus new-item"></i>
+              <span emoji-picker="task.icon" placement="right-relative" title="Choose an icon" emoji="{{task.icon || ':smiley:'}}" replace-content="true"></span>
               <input type="text" placeholder="e.g. New shoes" ng-model="task.title">
             </label>
           </div>

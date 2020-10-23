@@ -85,3 +85,7 @@ span.item-title {
     position: relative;
     top: 10px;
 }
+
+.overflow-visible {
+    overflow: visible;
+}

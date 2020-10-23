@@ -1,4 +1,4 @@
-app.controller('ContentController', function(
+app.controller('ContentController', function (
     $scope,
     $ionicModal,
     ProjectsService,
@@ -21,39 +21,40 @@ app.controller('ContentController', function(
 
     $scope.modal = {};
 
-    $scope.logout = function() {
+    $scope.keyword = '';
+
+    $scope.logout = function () {
         AuthService.logout();
     };
 
     $scope.hasOpenProject = false;
 
-    $rootScope.$on('app:login', function() {
+    $rootScope.$on('app:login', function () {
         init();
     });
 
-    var init = function() {
+    var init = function () {
         AuthService.checkAuth()
-            .then(function(user) {
+            .then(function (user) {
                 if (user) {
                     loadUser(user);
-                    Promise.all([loadProjects(user), loadFriendsProjects()])
-                    .then($scope.loaded);
+                    Promise.all([loadProjects(user), loadFriendsProjects()]).then($scope.loaded);
                 } else {
                     $scope.hideLoading();
                     $state.go('app.register');
                 }
             })
-            .catch(function(error) {
+            .catch(function (error) {
                 $scope.hideLoading();
                 $scope.showAlert(error);
             });
     };
 
-    var loadUser = function(user) {
+    var loadUser = function (user) {
         //keep track of the logged in user
-        return new Promise(function(resolve, reject) {
+        return new Promise(function (resolve, reject) {
             var userRef = projectRef.child('users/' + user.uid);
-            userRef.on('value', function(snapshot) {
+            userRef.on('value', function (snapshot) {
                 $scope.user = snapshot.val();
             });
 
@@ -61,18 +62,15 @@ app.controller('ContentController', function(
         });
     };
 
-    var loadProjects = function(authData) {
-        return new Promise(function(resolve, reject) {
+    var loadProjects = function (authData) {
+        return new Promise(function (resolve, reject) {
             $scope.uid = authData.uid;
             $scope.projects = [];
 
-            var listsRef = projectRef
-                .child('lists')
-                .startAt($scope.uid)
-                .endAt($scope.uid);
+            var listsRef = projectRef.child('lists').startAt($scope.uid).endAt($scope.uid);
 
             var projectsArray = $firebaseArray(listsRef);
-            projectsArray.$loaded().then(function() {
+            projectsArray.$loaded().then(function () {
                 for (var key in projectsArray) {
                     if (!isNaN(key)) {
                         var project = projectsArray[key];
@@ -84,14 +82,14 @@ app.controller('ContentController', function(
         });
     };
 
-    var loadFriendsProjects = function() {
-        return new Promise(function(resolve, reject) {
+    var loadFriendsProjects = function () {
+        return new Promise(function (resolve, reject) {
             $scope.friendsProjects = [];
 
             var listsRef = projectRef.child('users/' + $scope.uid + '/friendProjects');
 
             var projectsArray = $firebaseArray(listsRef);
-            projectsArray.$loaded().then(function() {
+            projectsArray.$loaded().then(function () {
                 for (var key in projectsArray) {
                     if (!isNaN(key)) {
                         var code = projectsArray[key].code;
@@ -109,7 +107,7 @@ app.controller('ContentController', function(
         });
     };
 
-    $scope.loaded = function() {
+    $scope.loaded = function () {
         $scope.hideLoading();
         if ($scope.projects.length > 0) {
             $scope.syncProjectKeys();
@@ -121,7 +119,7 @@ app.controller('ContentController', function(
             }
         } else {
             //user has no projects, ask if they have a code
-            $scope.codeDialog().then(function(res) {
+            $scope.codeDialog().then(function (res) {
                 if (res) {
                     $scope.enterCode();
                 } else {
@@ -132,7 +130,7 @@ app.controller('ContentController', function(
         }
     };
 
-    $scope.codeDialog = function() {
+    $scope.codeDialog = function () {
         return $ionicPopup.confirm({
             title: 'Welcome to Shhlist',
             content: 'Did a friend share a list code with you',
@@ -140,14 +138,14 @@ app.controller('ContentController', function(
                 {
                     text: 'No Code',
                     type: 'button-default',
-                    onTap: function(e) {
+                    onTap: function (e) {
                         return false;
                     },
                 },
                 {
                     text: 'Code',
                     type: 'button-positive',
-                    onTap: function(e) {
+                    onTap: function (e) {
                         return true;
                     },
                 },
@@ -155,7 +153,7 @@ app.controller('ContentController', function(
         });
     };
 
-    $scope.enterCodeDialog = function() {
+    $scope.enterCodeDialog = function () {
         return $ionicPopup.show({
             template: '<input type="text" ng-model="modal.friendCode">',
             title: "Enter your friend's code",
@@ -166,7 +164,7 @@ app.controller('ContentController', function(
                 {
                     text: '<b>Ok</b>',
                     type: 'button-positive',
-                    onTap: function(e) {
+                    onTap: function (e) {
                         var friendCode = $scope.modal.friendCode;
                         $scope.modal.friendCode = '';
                         return friendCode;
@@ -176,7 +174,7 @@ app.controller('ContentController', function(
         });
     };
 
-    $scope.syncProjectKeys = function() {
+    $scope.syncProjectKeys = function () {
         var keys = [];
         for (var key in $scope.projects) {
             if ($scope.projects[key].$id) {
@@ -186,7 +184,7 @@ app.controller('ContentController', function(
         $scope.projectKeys = keys;
     };
 
-    $scope.showLoading = function() {
+    $scope.showLoading = function () {
         $scope.loading = $ionicLoading.show({
             template: '<i class="icon ion-load-c"></i>',
             animation: 'fade-in',
@@ -196,15 +194,15 @@ app.controller('ContentController', function(
         });
     };
 
-    $scope.hideLoading = function() {
+    $scope.hideLoading = function () {
         $ionicLoading.hide();
     };
 
     // Selects the given project by it's code
-    $scope.selectProject = function(code) {
+    $scope.selectProject = function (code) {
         $scope.activeProject = projectRef.child('lists').child(code);
 
-        $scope.activeProject.once('value', function(snapshot) {
+        $scope.activeProject.once('value', function (snapshot) {
             $scope.setActiveProject(snapshot);
         });
     };
@@ -222,7 +220,7 @@ app.controller('ContentController', function(
         }
     }
 
-    $scope.setActiveProject = function(key) {
+    $scope.setActiveProject = function (key) {
         $scope.activeProjectObject = $firebaseObject($scope.activeProject);
         $scope.activeTasks = $scope.activeProject.child('tasks');
         $scope.activeTasksArray = $firebaseArray($scope.activeTasks);
@@ -235,7 +233,7 @@ app.controller('ContentController', function(
     // Create our modals
     $ionicModal.fromTemplateUrl(
         'templates/newprojectmodal.html',
-        function(modal) {
+        function (modal) {
             $scope.projectModal = modal;
         },
         {
@@ -245,7 +243,7 @@ app.controller('ContentController', function(
 
     $ionicModal.fromTemplateUrl(
         'templates/projectsettingsmodal.html',
-        function(modal) {
+        function (modal) {
             $scope.projectSettingsModal = modal;
         },
         {
@@ -253,7 +251,7 @@ app.controller('ContentController', function(
         }
     );
 
-    $scope.createTask = function(task) {
+    $scope.createTask = function (task) {
         if (!$scope.activeProject || !task || !task.title) {
             return;
         }
@@ -263,23 +261,25 @@ app.controller('ContentController', function(
         $scope.activeTasksArray
             .$add({
                 title: task.title,
+                icon: task.icon,
                 finished: false,
                 uid: $scope.activeProjectObject.uid,
                 created_by: $scope.user.name,
                 created_by_uid: $scope.uid,
                 created_at: new Date().getTime(),
             })
-            .then(function(/*ref*/) {
+            .then(function (/*ref*/) {
                 $scope.hideLoading();
             });
 
         // reset task form title
         task.title = '';
+        task.icon = undefined;
 
         $scope.trackEvent('Projects', 'Task', 'Add', 1);
     };
 
-    $scope.createProject = function(project) {
+    $scope.createProject = function (project) {
         if (!project) {
             return;
         }
@@ -291,7 +291,7 @@ app.controller('ContentController', function(
         var project = ProjectsService.newProject(project, $scope.uid);
 
         //check that no list exists with that code
-        projectRef.child('lists/' + project.code).once('value', function(snapshot) {
+        projectRef.child('lists/' + project.code).once('value', function (snapshot) {
             if (snapshot.exists()) {
                 //code already exists, try again
                 $scope.createProject(project);
@@ -300,7 +300,7 @@ app.controller('ContentController', function(
 
             // store project to firebase projects, upon success make it active project
             var newProjectRef = projectRef.child('lists').child(project.code);
-            newProjectRef.set(project, function(error) {
+            newProjectRef.set(project, function (error) {
                 if (!error) {
                     //add the new project to our existing list
                     $scope.projects.push($firebaseObject(newProjectRef));
@@ -317,44 +317,44 @@ app.controller('ContentController', function(
         });
     };
 
-    $scope.newProject = function() {
+    $scope.newProject = function () {
         $scope.projectModal.show();
     };
 
-    $scope.closeNewProject = function() {
+    $scope.closeNewProject = function () {
         $scope.projectModal.hide();
     };
 
-    $scope.projectSettings = function() {
+    $scope.projectSettings = function () {
         $scope.projectSettingsModal.show();
     };
 
-    $scope.closeProjectSettings = function() {
+    $scope.closeProjectSettings = function () {
         $scope.projectSettingsModal.hide();
     };
 
-    $scope.updateProjectSettings =  function(settings) {
-        $scope.activeProjectObject.$save().catch(function(err) {
+    $scope.updateProjectSettings = function (settings) {
+        $scope.activeProjectObject.$save().catch(function (err) {
             $ionicPopup.alert({
                 title: 'Oops',
                 template: error,
             });
         });
-    }
+    };
 
-    $scope.showThirdPartyWarning = function() {
+    $scope.showThirdPartyWarning = function () {
         $ionicPopup.alert({
             title: 'Ticked items are public',
             template: `The settings for this list mean that ticked items are visible to the creator.`,
         });
     };
 
-    $scope.toggleProjects = function() {
+    $scope.toggleProjects = function () {
         $ionicSideMenuDelegate.toggleLeft();
     };
 
-    $scope.toggleTask = function(key) {
-        $timeout(function() {
+    $scope.toggleTask = function (key) {
+        $timeout(function () {
             var clickedTask = $scope.activeTasksArray.$getRecord(key);
             clickedTask.toggled_by = $scope.user.name;
             clickedTask.toggled_by_uid = $scope.uid;
@@ -364,17 +364,17 @@ app.controller('ContentController', function(
         $scope.trackEvent('Projects', 'Task', 'Toggle', 1);
     };
 
-    $scope.showTask = function(task) {
+    $scope.showTask = function (task) {
         return task.uid != $scope.uid;
     };
 
-    $scope.deleteTask = function(key) {
+    $scope.deleteTask = function (key) {
         $ionicPopup
             .confirm({
                 title: 'Delete Item',
                 content: 'You sure?',
             })
-            .then(function(res) {
+            .then(function (res) {
                 if (res) {
                     $scope.activeTasksArray.$remove(key);
 
@@ -384,15 +384,15 @@ app.controller('ContentController', function(
             });
     };
 
-    $scope.deleteProject = function(code) {
+    $scope.deleteProject = function (code) {
         $ionicPopup
             .confirm({
                 title: 'Delete Project',
                 content: 'You sure?',
             })
-            .then(function(res) {
+            .then(function (res) {
                 if (res) {
-                    projectRef.child('lists/' + code).remove(function() {
+                    projectRef.child('lists/' + code).remove(function () {
                         window.location.reload();
                     });
                 } else {
@@ -402,15 +402,15 @@ app.controller('ContentController', function(
         $scope.trackEvent('Projects', 'Friend Project', 'Delete', 1);
     };
 
-    $scope.deleteFriendProject = function(code) {
+    $scope.deleteFriendProject = function (code) {
         $ionicPopup
             .confirm({
                 title: 'Delete Friend Project',
                 content: 'You sure?',
             })
-            .then(function(res) {
+            .then(function (res) {
                 if (res) {
-                    projectRef.child('users/' + $scope.uid + '/friendProjects/' + code).remove(function() {
+                    projectRef.child('users/' + $scope.uid + '/friendProjects/' + code).remove(function () {
                         window.location.reload();
                     });
                 } else {
@@ -420,20 +420,20 @@ app.controller('ContentController', function(
         $scope.trackEvent('Projects', 'Project', 'Delete', 1);
     };
 
-    $scope.shareProject = function(project) {
+    $scope.shareProject = function (project) {
         window.socialmessage.send({
             text: 'Check out my list on Shhlist. Enter code: ' + project.code,
         }); //cordova social message plugin
         $scope.trackEvent('Projects', 'Share', project.code, 1);
     };
 
-    $scope.enterCode = function() {
+    $scope.enterCode = function () {
         $ionicSideMenuDelegate.toggleLeft(false);
 
-        $scope.enterCodeDialog().then(function(code) {
+        $scope.enterCodeDialog().then(function (code) {
             if (code && code.trim() != '') {
                 var friendProjectRef = projectRef.child('lists/' + code);
-                friendProjectRef.once('value', function(snapshot) {
+                friendProjectRef.once('value', function (snapshot) {
                     //check that the project actually exists
                     if (snapshot.exists()) {
                         //add the list code
@@ -450,7 +450,7 @@ app.controller('ContentController', function(
                     } else {
                         $scope
                             .showAlert("Doesn't look like that list exists. Double check the code and try again.")
-                            .then(function() {
+                            .then(function () {
                                 $scope.enterCode();
                             });
                     }
@@ -461,14 +461,14 @@ app.controller('ContentController', function(
         });
     };
 
-    $scope.showAlert = function(msg) {
+    $scope.showAlert = function (msg) {
         return $ionicPopup.alert({
             title: 'Oops',
             template: msg,
         });
     };
 
-    $scope.trackEvent = function(Category, Action, Label, Value) {
+    $scope.trackEvent = function (Category, Action, Label, Value) {
         if (typeof analytics != 'undefined') {
             window.analytics.trackEvent(Category, Action, Label, Value);
         }

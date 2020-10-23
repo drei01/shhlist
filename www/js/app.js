@@ -4,7 +4,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-var app = angular.module('shhlist', ['ionic', 'firebase', 'ionic.utils']);
+var app = angular.module('shhlist', ['ionic', 'firebase', 'ionic.utils', 'vkEmojiPicker']);
 
 var firebaseConfig = {
     apiKey: 'AIzaSyCrP7LK-Di5YeAA0QBr7Av93TS6DAl1Nn4',
@@ -17,8 +17,8 @@ var firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
-app.run(function($ionicPlatform) {
-    $ionicPlatform.ready(function() {
+app.run(function ($ionicPlatform) {
+    $ionicPlatform.ready(function () {
         if (window.cordova && window.cordova.plugins.Keyboard) {
             cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
         }
@@ -33,7 +33,7 @@ app.run(function($ionicPlatform) {
     });
 });
 
-app.config(function($stateProvider, $urlRouterProvider) {
+app.config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
         .state('app', {
             url: '/app',
@@ -79,10 +79,10 @@ app.config(function($stateProvider, $urlRouterProvider) {
 app.directive('analytics', [
     '$rootScope',
     '$location',
-    function($rootScope, $location) {
+    function ($rootScope, $location) {
         return {
-            link: function(scope, elem, attrs, ctrl) {
-                $rootScope.$on('$routeChangeSuccess', function(event, currRoute, prevRoute) {
+            link: function (scope, elem, attrs, ctrl) {
+                $rootScope.$on('$routeChangeSuccess', function (event, currRoute, prevRoute) {
                     if (typeof analytics !== 'undefined') {
                         window.analytics.trackView($location.path());
                     }
