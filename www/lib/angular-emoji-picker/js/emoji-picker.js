@@ -2219,9 +2219,11 @@ angular.module('vkEmojiPicker').directive('emojiPicker', [
                 }
 
                 var container = document.querySelector('[ng-model="' + $scope.emojiPicker + '"]');
-                container.addEventListener('blur', function (event) {
-                    $scope.caretPosition = container.selectionStart;
-                });
+                if (container) {
+                    container.addEventListener('blur', function (event) {
+                        $scope.caretPosition = container.selectionStart;
+                    });
+                }
             },
         };
     },
@@ -2284,7 +2286,7 @@ angular.module('vkEmojiPicker').directive('emojiRemovable', function () {
                 return map;
             };
 
-            var rebindClick = function () {
+            var rebindEmojiClick = function () {
                 if ($scope.model == null) {
                     return;
                 }
@@ -2312,7 +2314,7 @@ angular.module('vkEmojiPicker').directive('emojiRemovable', function () {
 
             $scope.$watch(function () {
                 return element[0].querySelectorAll('i.emoji-picker').length;
-            }, rebindClick);
+            }, rebindEmojiClick);
 
             $scope.$on('$destroy', function () {
                 element.off();
@@ -2543,6 +2545,15 @@ angular.module('vkEmojiPicker').provider('$emojiPopover', function () {
                     ionic.EventController.on('tap', $popover.toggle, element[0]);
                 });
 
+                var rebindClose = function (element, $scope) {
+                    var closeButtons = element[0].querySelectorAll('i.close-button');
+                    angular.forEach(closeButtons, function (closeButton) {
+                        var closeButtonElement = angular.element(closeButton);
+                        ionic.EventController.off('tap', function () {}, closeButtonElement[0]);
+                        ionic.EventController.on('tap', $scope.$hide, closeButtonElement[0]);
+                    });
+                };
+
                 $popover.show = function () {
                     if ($popover.$isShown) {
                         return;
@@ -2558,6 +2569,8 @@ angular.module('vkEmojiPicker').provider('$emojiPopover', function () {
                     popoverElement = popoverLinker(popoverScope, function (clonedElement, scope) {});
 
                     element.after(popoverElement);
+                    // rebind the close button because Ionic takes over the clicks
+                    rebindClose(popoverElement, scope);
                     $popover.$isShown = true;
                     scope.$digest();
 
