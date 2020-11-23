@@ -1,50 +1,52 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Shhlist</title>
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-    <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' http://192.168.0.8:8100 http://192.168.0.8:35729 https://shhlist.firebaseio.com https://*.firebaseio.com googleapis.com https://www.gstatic.com 'unsafe-inline' 'unsafe-eval'; object-src none;">
+    <head>
+        <meta charset="utf-8" />
+        <title>Shhlist</title>
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width" />
+        <meta
+            http-equiv="Content-Security-Policy"
+            content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' http://192.168.0.8:8100 http://192.168.0.8:35729 https://shhlist.firebaseio.com https://*.firebaseio.com googleapis.com https://www.gstatic.com 'unsafe-inline' 'unsafe-eval'; object-src none;"
+        />
 
-    <link href="css/ionic.app.min.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
-      
-    <!-- Promise polyfill -->
-    <script src="js/Promise.js"></script>
+        <link href="css/ionic.app.min.css" rel="stylesheet" />
+        <link href="css/style.css" rel="stylesheet" />
 
-    <!-- Ionic -->
-    <script src="lib/ionic/js/ionic.bundle.js"></script>
+        <!-- Promise polyfill -->
+        <script src="js/Promise.js"></script>
 
-    <!-- Angular -->
-    <script src="lib/ionic/js/angular/angular.min.js"></script>
-    
-    <!-- Firebase -->
-    <script src="https://www.gstatic.com/firebasejs/5.0.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/5.0.0/firebase-database.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/5.0.0/firebase-auth.js"></script>
+        <!-- Ionic -->
+        <script src="lib/ionic/js/ionic.bundle.js"></script>
 
-    <!-- AngularFire -->
-    <script src="js/angularfire.min.js"></script>
+        <!-- Angular -->
+        <script src="lib/ionic/js/angular/angular.min.js"></script>
 
-    <!-- Angular Emoji Picker -->
-    <script src="lib/angular-sanitize/angular-sanitize.min.js"></script>
-    <link href="lib/angular-emoji-picker/css/emoji-picker.css" rel="stylesheet">
-    <script src="lib/angular-emoji-picker/js/emoji-picker.js"></script>
+        <!-- Firebase -->
+        <script src="https://www.gstatic.com/firebasejs/5.0.0/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.0.0/firebase-database.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.0.0/firebase-auth.js"></script>
 
-      
-    <script src="js/app.js"></script>
-    <script src="js/controllers/content-controller.js"></script>
-    <script src="js/controllers/register-controller.js"></script>
-    <script src="js/controllers/login-controller.js"></script>
-    <script src="js/services/projects-service.js"></script>
-    <script src="js/services/auth-service.js"></script>
-    <script src="js/services/ionic-utils.js"></script>
-      
-    <!-- Needed for Cordova/PhoneGap (will be a 404 during development) -->
-    <script src="cordova.js"></script>
-  </head>
-  <body ng-app="shhlist">
-	<ion-nav-view></ion-nav-view>
-    <div id="fb-root"></div>
-  </body>
+        <!-- AngularFire -->
+        <script src="js/angularfire.min.js"></script>
+
+        <!-- Angular Emoji Picker -->
+        <script src="lib/angular-sanitize/angular-sanitize.min.js"></script>
+        <link href="lib/angular-emoji-picker/css/emoji-picker.css" rel="stylesheet" />
+        <script src="lib/angular-emoji-picker/js/emoji-picker.js"></script>
+
+        <script src="js/app.js"></script>
+        <script src="js/controllers/content-controller.js"></script>
+        <script src="js/controllers/register-controller.js"></script>
+        <script src="js/controllers/login-controller.js"></script>
+        <script src="js/services/projects-service.js"></script>
+        <script src="js/services/auth-service.js"></script>
+        <script src="js/services/ionic-utils.js"></script>
+
+        <!-- Needed for Cordova/PhoneGap (will be a 404 during development) -->
+        <script src="cordova.js"></script>
+    </head>
+    <body ng-app="shhlist">
+        <ion-nav-view></ion-nav-view>
+        <div id="fb-root"></div>
+    </body>
 </html>

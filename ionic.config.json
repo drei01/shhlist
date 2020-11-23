@@ -3,6 +3,7 @@
   "integrations": {
     "cordova": {}
   },
+  "type": "ionic1",
   "gulpStartupTasks": [
     "sass",
     "watch"
@@ -11,7 +12,5 @@
     "www/**/*",
     "!www/lib/**/*"
   ],
-  "type": "ionic1",
-  "pro_id": "ff1ee08a",
-  "app_id": ""
+  "id": "ff1ee08a"
 }

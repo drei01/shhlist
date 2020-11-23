@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget android-versionCode="13" id="org.codefish.shhlist" version="1.0.7" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget android-versionCode="18" id="org.codefish.shhlist" version="1.0.7" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Shhlist</name>
     <description>
         An Ionic Framework and Cordova project.
@@ -11,8 +11,13 @@
     <access origin="*" />
     <allow-navigation href="*" />
     <allow-navigation href="http://192.168.0.8:8100" />
+    <allow-navigation href="http://192.168.0.7:8100" />
+    <allow-navigation href="http://192.168.0.11:8100" />
+    <allow-navigation href="http://192.168.0.7:8100" />
     <allow-intent href="*.firebaseio.com" />
     <allow-intent href="auth.firebase.com" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
     <preference name="webviewbounce" value="false" />
     <preference name="UIWebViewBounce" value="false" />
     <preference name="DisallowOverscroll" value="true" />
@@ -31,6 +36,10 @@
         <icon density="mdpi" src="icons/android/mdpi.png" />
         <icon density="hdpi" src="icons/android/hdpi.png" />
         <icon density="xhdpi" src="icons/android/xhdpi.png" />
+        <splash density="hdpi" src="splash/android/splash-port-hdpi.png" />
+        <splash density="ldpi" src="splash/android/splash-port-ldpi.png" />
+        <splash density="mdpi" src="splash/android/splash-port-mdpi.png" />
+        <splash density="xhdpi" src="splash/android/splash-port-xhdpi.png" />
         <splash density="land-hdpi" src="splash/android/splash-land-hdpi.png" />
         <splash density="land-ldpi" src="splash/android/splash-land-ldpi.png" />
         <splash density="land-mdpi" src="splash/android/splash-land-mdpi.png" />
@@ -39,7 +48,10 @@
         <splash density="port-ldpi" src="splash/android/splash-port-ldpi.png" />
         <splash density="port-mdpi" src="splash/android/splash-port-mdpi.png" />
         <splash density="port-xhdpi" src="splash/android/splash-port-xhdpi.png" />
-        <preference name="android-targetSdkVersion" value="28" />
+        <preference name="android-targetSdkVersion" value="29" />
+        <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application" xmlns:android="http://schemas.android.com/apk/res/android">
+            <application android:usesCleartextTraffic="true" />
+        </edit-config>
     </platform>
     <platform name="ios">
         <icon height="57" src="resources/ios/icon/icon.png" width="57" />
@@ -71,5 +83,4 @@
     </platform>
     <plugin name="cordova-plugin-whitelist" spec="^1.3.3" />
     <plugin name="cordova-plugin-social-message" spec="git+https://github.com/leecrossley/cordova-plugin-social-message.git" />
-    <allow-navigation href="http://192.168.0.11:8100" />
 </widget>
