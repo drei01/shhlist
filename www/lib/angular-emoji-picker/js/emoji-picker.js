@@ -120,7 +120,7 @@ angular.module('templates/emoji-popover.html', []).run([
     function ($templateCache) {
         $templateCache.put(
             'templates/emoji-popover.html',
-            '<div class="emoji-popover" tabindex="-1">\n' +
+            '<ion-content><div class="emoji-popover" tabindex="-1">\n' +
                 '  <div class="close-button-holder">\n' +
                 '    <i class="close-button" ng-click="$hide()">&times;</i>\n' +
                 '  </div>\n' +
@@ -143,7 +143,7 @@ angular.module('templates/emoji-popover.html', []).run([
                 '      </div>\n' +
                 '    </div>\n' +
                 '  </div>\n' +
-                '</div>\n' +
+                '</div></ion-content>\n' +
                 ''
         );
     },
@@ -2484,6 +2484,11 @@ angular.module('vkEmojiPicker').provider('$emojiPopover', function () {
                             };
                             break;
                         case 'top':
+                            offset = {
+                                top: -250,
+                                left: 0,
+                            };
+                            break;
                         default:
                             offset = {
                                 top: position.top - popoverHeight - position.height * 3,
