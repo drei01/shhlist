@@ -16,6 +16,9 @@ app.controller(
     ) {
         const TASK_MAX_AGE_MONTHS = 6;
 
+        $scope.isWebapp = !window.cordova;
+        $scope.showInstallPrompt = window.showInstallPrompt;
+
         // Load projects
         var projectRef = firebase.database().ref(),
             firebaseKeyRegEx = /^-\w{19}$/,
