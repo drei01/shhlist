@@ -1,0 +1,60 @@
+<ion-side-menus>
+
+  <ion-pane ion-side-menu-content>
+    <ion-nav-bar class="bar-royal"></ion-nav-bar>
+    <ion-nav-view name="menuContent" animation="slide-left-right"></ion-nav-view>
+  </ion-pane>
+
+  <ion-side-menu side="left">
+    <header class="bar bar-header bar-royal">
+      <h1 class="title">Lists</h1>
+      <button menu-toggle="left" class="button button-icon icon ion-plus-round"
+              ng-click="newProject()"></button>
+    </header>
+    <ion-content class="has-header">
+      <ion-list>
+        <ion-item class="item item-divider">
+            Lists
+        </ion-item>
+        <ion-item
+            href="#/app/tasks"
+            ng-repeat="(key,project) in projects"
+            ng-click="selectProject(project.code)"
+            ng-class="{active: activeProjectObject.$id === project.$id}">
+          {{ project.title }}
+          <button class="button button-icon icon ion-close-circled
+            x-box red menu-x"
+            ng-click="deleteProject(project.code)"></button>
+        </ion-item>
+          
+        <ion-item class="item item-divider">
+            Friends Lists
+        </ion-item>
+          
+        <ion-item
+            href="#/app/tasks"
+            ng-repeat="(key,project) in friendsProjects"
+            ng-click="selectProject(project.obj.code)"
+            ng-class="{active: activeProjectObject.$id === project.obj.$id}">
+          {{ project.obj.title }}
+          <button class="button button-icon icon ion-close-circled
+            x-box red menu-x"
+            ng-click="deleteFriendProject(project.id)"></button>
+        </ion-item>
+      </ion-list>
+      <ion-list>
+        <ion-item href="#/app/invites" ng-click="enterCode()" class="item-icon-left">
+            <i class="icon ion-ios-people"></i>
+            Enter list code
+        </ion-item>
+      </ion-list>
+      <ion-list>
+        <ion-item ng-click="logout()" class="item-icon-left">
+            <i class="icon ion-android-exit"></i>
+            Logout
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-side-menu>
+
+</ion-side-menus>

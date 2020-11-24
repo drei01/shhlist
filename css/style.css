@@ -1,0 +1,101 @@
+/* Empty. Add your own CSS if you like */
+div.code-wrapper {
+    text-align: center;
+}
+
+.code-wrapper .code {
+    font-weight: 600;
+    font-size: 22px;
+}
+
+form i.icon.error {
+    color: #ef4e3a;
+}
+
+form input + i.icon.error {
+    display: none;
+    margin-left: 8px;
+}
+
+form select + i.icon.error {
+    display: none;
+    margin-left: 8px;
+}
+
+form.ng-submitted input.ng-invalid + i.icon.error {
+    display: block;
+}
+
+form.ng-submitted select.ng-invalid + i.icon.error {
+    display: block;
+}
+
+form .has-error {
+    border-left: 3px solid #cc2511;
+    border-right: 3px solid #cc2511;
+}
+
+form .has-success {
+    border-left: 3px solid #3d8b3d;
+    border-right: 3px solid #3d8b3d;
+}
+
+form.ng-submitted input.ng-valid + i.icon.error {
+    display: none;
+}
+
+.task-detail,
+.task-sub-detail {
+    display: flex;
+    flex-direction: row;
+}
+
+.item-note {
+    flex: 1;
+}
+
+.item-note,
+span.item-title {
+    white-space: normal !important;
+    text-decoration: none !important;
+}
+
+span.item-title {
+    display: inline-block;
+    max-width: 90%;
+    flex-grow: 3;
+}
+
+.button.x-box {
+    margin-left: auto;
+    align-self: flex-end;
+}
+
+.button.menu-x {
+    position: absolute;
+    right: 0;
+    bottom: 3px;
+}
+
+.item-note-pad-right {
+    padding-right: 30px;
+}
+
+.toggled-by {
+    position: relative;
+    top: 10px;
+}
+
+.overflow-visible {
+    overflow: visible;
+}
+
+.item-icon,
+.icon-picker {
+    margin-right: 5px;
+    font-size: 20px;
+}
+
+.icon-picker {
+    cursor: pointer;
+}

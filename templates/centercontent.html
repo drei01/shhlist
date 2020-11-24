@@ -1,0 +1,92 @@
+<ion-view title="{{ activeProjectObject.title ? activeProjectObject.title : 'Shhlist' }}">
+    <ion-nav-buttons side="left">
+        <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+    </ion-nav-buttons>
+    <ion-nav-buttons side="right">
+        <button
+            ng-if="activeProjectObject.settings.thirdParty"
+            ng-click="showThirdPartyWarning()"
+            class="button button-icon icon ion-unlocked"
+        ></button>
+        <button
+            ng-if="activeProjectObject && activeProjectObject.uid===uid"
+            ng-click="projectSettings()"
+            class="button button-icon icon ion-gear-a"
+        ></button>
+    </ion-nav-buttons>
+    <ion-content class="has-header">
+        <ul class="list" ng-show="activeTasksArray">
+            <li
+                class="item task"
+                ng-repeat="(key,task) in activeTasksArray"
+                ng-class="{'finished': task.finished === true && activeProjectObject.uid!=uid , 'item-checkbox': task.uid!=uid}"
+                ng-if="(task.created_by_uid === uid || activeProjectObject.uid!=uid)"
+            >
+                <!-- created by me or not my project -->
+                <div class="task-detail">
+                    <label
+                        class="checkbox checkbox-balanced"
+                        ng-model="task.finished"
+                        ng-if="task.uid!==uid || activeProjectObject.settings.thirdParty"
+                    >
+                        <div class="checkbox checkbox-input-hidden disable-pointer-events checkbox-circle">
+                            <input ng-model="task.finished" type="checkbox" ng-change="toggleTask(task.$id)" /><i
+                                class="checkbox-icon"
+                            ></i>
+                        </div>
+                    </label>
+                    <i
+                        class="icon ion-ios-circle-outline list-icon"
+                        ng-if="task.uid===uid && !activeProjectObject.settings.thirdParty"
+                    ></i>
+                    <span class="item-icon" ng-if="task.icon" ng-bind-html="task.icon | emojify"></span>
+                    <span class="item-title">{{ task.title }}</span>
+                    <button
+                        class="button button-icon icon ion-close-circled x-box red"
+                        ng-click="deleteTask(key)"
+                        ng-show="task.created_by_uid===uid"
+                    ></button>
+                </div>
+                <div class="task-sub-detail">
+                    <span class="item-note" ng-class="task.uid===uid?'item-note-pad-right':''">
+                        <div ng-if="task.created_by_uid != uid">added by {{ task.created_by }}</div>
+                        <div ng-if="task.created_by_uid === uid && activeProjectObject.uid!=uid">you added</div>
+                    </span>
+                </div>
+            </li>
+            <li>
+                <form ng-submit="createTask(task)">
+                    <div class="list">
+                        <label class="item item-input overflow-visible">
+                            <i class="icon ion-plus new-item"></i>
+                            <span
+                                emoji-picker="task.icon"
+                                placement="top"
+                                title="Choose an icon"
+                                emoji="{{task.icon || ':smiley:'}}"
+                                replace-content="true"
+                                class="icon-picker"
+                            ></span>
+                            <input type="text" placeholder="e.g. New shoes" ng-model="task.title" />
+                        </label>
+                    </div>
+
+                    <div class="padding" ng-show="activeProjectObject.uid===uid">
+                        <div class="code-wrapper">
+                            Your unique list code is:
+                            <div class="code">{{activeProjectObject.code}}</div>
+                        </div>
+
+                        <button
+                            type="button"
+                            class="button button-block button-dark icon ion-share"
+                            ng-click="shareProject(activeProjectObject)"
+                        >
+                            &nbsp;Shhare it
+                        </button>
+                    </div>
+                </form>
+            </li>
+        </ul>
+    </ion-content>
+</ion-view>

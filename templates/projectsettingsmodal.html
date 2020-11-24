@@ -1,0 +1,20 @@
+<div class="modal">
+  <ion-header-bar class="bar-royal">
+    <h1 class="title">Settings</h1>
+    <button class="button" ng-click="closeProjectSettings()">Cancel</button>
+  </ion-header-bar>
+
+  <ion-content has-header="true">
+    <ul class="list">
+      <li class="item item-toggle">
+        This list is for someone else
+        <label class="toggle toggle-calm">
+          <input type="checkbox" ng-model="activeProjectObject.settings.thirdParty" ng-change="updateProjectSettings()"/>
+          <div class="track">
+            <div class="handle"></div>
+          </div>
+        </label>
+      </li>
+    </ul>
+  </ion-content>
+</div>

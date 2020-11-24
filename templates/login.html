@@ -1,0 +1,72 @@
+<ion-view view-title="Login to Shhlist" name="login-view">
+  <ion-nav-buttons side="right">
+    <a class="button button-clear button-light" ng-href="#/app/register"
+      >Register</a
+    >
+  </ion-nav-buttons>
+  <ion-content class="padding">
+    <div ng-if="!showResetPassword">
+      <form ng-submit="login()">
+        <div class="list list-inset">
+          <label class="item item-input">
+            <input
+              type="email"
+              placeholder="Email address"
+              ng-model="data.email"
+              ng-required="true"
+            />
+            <i class="icon ion-alert-circled error col col-10"></i>
+          </label>
+          <label class="item item-input">
+            <input
+              type="password"
+              placeholder="Password"
+              ng-model="data.password"
+              ng-required="true"
+            />
+            <i class="icon ion-alert-circled error col col-10"></i>
+          </label>
+        </div>
+        <button class="button button-block button-balanced" type="submit">
+          Login
+        </button>
+      </form>
+
+      <div class="card">
+        <div class="item item-text-wrap">
+          <small
+            ><button ng-click="toggleResetPasswordForm()">
+              Forgot your password?
+            </button></small
+          >
+        </div>
+      </div>
+    </div>
+
+    <div ng-if="showResetPassword">
+      <div class="card">
+        <div class="item item-text-wrap">
+          Enter your email address or
+          <a ng-href="#/app/login" ng-click="toggleResetPasswordForm()">login</a>
+        </div>
+      </div>
+      <form ng-submit="resetPassword()">
+        <div class="list list-inset">
+          <label class="item item-input">
+            <input
+              type="email"
+              placeholder="Email address"
+              ng-model="data.email"
+              ng-required="true"
+            />
+            <i class="icon ion-alert-circled error col col-10"></i>
+          </label>
+        </div>
+
+        <button class="button button-block button-balanced" type="submit">
+          Reset password
+        </button>
+      </form>
+    </div>
+  </ion-content>
+</ion-view>

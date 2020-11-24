@@ -1,0 +1,20 @@
+{
+    "short_name": "Shhlist",
+    "name": "Shhlist: Never get duplicate presents again",
+    "description": "Present list manager",
+    "icons": [
+      {
+        "src": "/img/icon.png",
+        "type": "image/png",
+        "sizes": "512x512"
+      }
+    ],
+    "start_url": "/?source=pwa",
+    "background_color": "#FFFFFF",
+    "display": "fullscreen",
+    "orientation": "portrait",
+    "scope": "/",
+    "theme_color": "#886aea",
+    "shortcuts": [
+    ]
+  }
