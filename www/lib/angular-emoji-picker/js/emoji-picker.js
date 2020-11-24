@@ -120,7 +120,7 @@ angular.module('templates/emoji-popover.html', []).run([
     function ($templateCache) {
         $templateCache.put(
             'templates/emoji-popover.html',
-            '<ion-content><div class="emoji-popover" tabindex="-1">\n' +
+            '<ion-content scrollbar-y="false"><div class="emoji-popover" tabindex="-1">\n' +
                 '  <div class="close-button-holder">\n' +
                 '    <i class="close-button" ng-click="$hide()">&times;</i>\n' +
                 '  </div>\n' +
@@ -135,12 +135,12 @@ angular.module('templates/emoji-popover.html', []).run([
                 '        </i>\n' +
                 '        <span ng-if="!replaceContent" class="btn-backspace" ng-click="remove()">&#x232B;</span>\n' +
                 '      </div>\n' +
-                '      <div class="emojis">\n' +
+                '      <ion-content style="top:30px;" scrollbar-y="false"><div class="emojis">\n' +
                 '        <i class="emoji-picker emoji-{{ ::toClassName(emoji) }}"\n' +
                 '          ng-repeat="emoji in selectedGroup.emoji"\n' +
                 '          ng-click="emojiClicked(emoji)">\n' +
                 '      </i>\n' +
-                '      </div>\n' +
+                '      </div></ion-content>\n' +
                 '    </div>\n' +
                 '  </div>\n' +
                 '</div></ion-content>\n' +
