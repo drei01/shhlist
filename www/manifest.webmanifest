@@ -14,7 +14,7 @@
         "sizes": "512x512"
       }
     ],
-    "start_url": "/?source=pwa",
+    "start_url": "./?source=pwa",
     "background_color": "#FFFFFF",
     "display": "fullscreen",
     "orientation": "portrait",
